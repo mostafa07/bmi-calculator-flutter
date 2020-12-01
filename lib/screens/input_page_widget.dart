@@ -1,14 +1,13 @@
 import 'package:bmi_calculator/bmi_calculator.dart';
+import 'package:bmi_calculator/components/ReusableCard.dart';
+import 'package:bmi_calculator/components/bottom_button.dart';
+import 'package:bmi_calculator/components/icon_content.dart';
+import 'package:bmi_calculator/components/round_icon_button.dart';
+import 'package:bmi_calculator/constants.dart';
+import 'package:bmi_calculator/enums/gender.dart';
 import 'package:bmi_calculator/screens/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../components/ReusableCard.dart';
-import '../components/bottom_button.dart';
-import '../components/icon_content.dart';
-import '../components/round_icon_button.dart';
-import '../constants.dart';
-import '../enums/gender.dart';
 
 class InputPage extends StatefulWidget {
   static const routeName = '/input';
@@ -210,23 +209,24 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           BottomButton(
-              label: 'CALCULATE',
-              onPress: () {
-                BmiCalculator calculator = BmiCalculator(
-                  weight: weight,
-                  height: height,
-                );
+            label: 'CALCULATE',
+            onPress: () {
+              BmiCalculator calculator = BmiCalculator(
+                weight: weight,
+                height: height,
+              );
 
-                return Navigator.pushNamed(
-                  context,
-                  '/results',
-                  arguments: ResultsPageArguments(
-                    bmiResult: calculator.calculateBMI(),
-                    resultText: calculator.getResult(),
-                    interpretation: calculator.getInterpretation(),
-                  ),
-                );
-              }),
+              return Navigator.pushNamed(
+                context,
+                ResultsPage.routeName,
+                arguments: ResultsPageArguments(
+                  bmiResult: calculator.calculateBMI(),
+                  resultText: calculator.getResult(),
+                  interpretation: calculator.getInterpretation(),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
